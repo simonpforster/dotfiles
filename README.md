@@ -11,7 +11,7 @@ stow --target ~/.config .
 ### System
 
 | Tool | Install | Used by |
-|------|---------|---------|
+| ------ | --------- | --------- |
 | [Neovim](https://neovim.io/) ≥ 0.12 | `brew install neovim` | nvim config |
 | [GNU Stow](https://www.gnu.org/software/stow/) | `brew install stow` | symlink management |
 | [tree-sitter CLI](https://tree-sitter.github.io/) | `brew install tree-sitter-cli` | nvim treesitter parser compilation |
@@ -41,4 +41,3 @@ These are installed automatically by Mason on first launch:
 - **codelldb** — debug adapter
 - **delve** — Go debugger
 - **markdownlint** — Markdown linter
-
