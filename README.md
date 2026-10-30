@@ -17,7 +17,6 @@ cd ~/dotfiles && stow --target ~/.config .
 | [Neovim](https://neovim.io/) ≥ 0.12 | `brew install neovim` | nvim config |
 | [GNU Stow](https://www.gnu.org/software/stow/) | `brew install stow` | symlink management |
 | [tree-sitter CLI](https://tree-sitter.github.io/) | `brew install tree-sitter-cli` | nvim treesitter parser compilation |
-| [GitHub CLI](https://cli.github.com/) ≥ 2.0 | `brew install gh` | gh config |
 | [git](https://git-scm.com/) | usually pre-installed on macOS/Linux | git config |
 
 ### Rust (rustup)
@@ -35,9 +34,6 @@ cd ~/dotfiles && stow --target ~/.config .
 dotfiles/
 ├── README.md              # This file - project documentation
 ├── .gitignore            # Local ignore patterns for git
-├── gh/                   # GitHub CLI configuration
-│   ├── config.yml        # Global settings (protocol, editor, pager)
-│   └── hosts.yml         # Host-specific configs (sanitized, no secrets)
 ├── git/                  # Git ignore patterns for local repos
 │   └── ignore            # Patterns to exclude from git tracking
 ├── nvim/                 # Neovim Lua configuration
@@ -46,7 +42,7 @@ dotfiles/
 │   │   └── lua/custom/plugins/*.lua  # Custom plugin definitions
 ├── zed/                  # Zed editor settings (Rust-based IDE)
 │   ├── settings.json     # Editor preferences and layout
-│   └── settings_backup.json  # Previous settings backup
+│   └── settings_backup.json  # Previous settings backup  
 └── yazi/                 # File manager configuration
     └── yazi.toml         # File manager configuration with nvim integration
 
@@ -56,9 +52,8 @@ dotfiles/
 
 This repository follows security best practices:
 
-- ✅ **No secrets**: No passwords, API keys, tokens, or credentials are committed
-- ✅ **Sanitized configs**: User-specific data (like GitHub usernames) is excluded from public repos  
-- ⚠️ **Local-only configs**: Some configurations in `~/.config/` may contain private data not tracked here
+- ✅ **No secrets**: No passwords, API keys, or tokens are committed to public repos
+- ⚠️ **Local-only configs**: Some configurations in `~/.config/` may contain private data not tracked here (e.g., GitHub CLI auth)
 
 ### Shell Configurations
 
@@ -88,4 +83,4 @@ Project-specific configurations (like `.claude/settings.local.json`) are exclude
 
 ---
 
-*Last updated: $(date -u +%Y-%m-%d)*
+*Last updated: 2026-10-30*
