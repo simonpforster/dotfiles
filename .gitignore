@@ -1,0 +1,19 @@
+# Git ignore patterns (from git/ignore)
+**/.claude/settings.local.json
+
+# Session data and cache files
+*.log
+*.cache/*.db.mdb
+*.mdb
+*.zwc
+*.DS_Store
+
+# Large binary files  
+*~
+
+# Zed session data
+conversations/
+prompts/
+
+# Stow configuration (handled by stow)
+.stowrc
