@@ -22,7 +22,7 @@ This dotfiles repository will be shared publicly on GitHub. **Extra care must be
 |-------------------|----------|---------------|
 | Shell configs | `.zshrc`, `.bashrc` | Generic shell settings, no secrets |
 | Editor configs | Neovim Lua, Vimrc | UI preferences, LSP settings only |
-| CLI configs (non-auth) | `gh/config.yml`, `gitconfig` | Protocol, aliases, editor settings |
+| CLI configs (non-auth) | `gitconfig` without credentials | Protocol, aliases only |
 | Terminal configs | Alacritty, Wezterm | Display preferences, key bindings |
 | Git ignore patterns | Local repo exclusions | Safety rules for version control |
 
@@ -32,7 +32,7 @@ This dotfiles repository will be shared publicly on GitHub. **Extra care must be
 
 | File Type | Examples | Risk |
 |-----------|----------|------|
-| **Credentials** | `gh/hosts.yml` with tokens, OAuth PATs | Account compromise within minutes of push |
+| **Credentials** | OAuth tokens, PATs, service accounts | Account compromise within minutes of push |
 | **API Keys** | `.env`, AWS credentials, service accounts | Cloud billing abuse, supply-chain attacks |
 | **Private keys** | SSH private keys (`id_rsa`), GPG keys | Supply-chain attacks, impersonation |
 | **PII** | Email addresses, phone numbers, full names | Privacy violation, doxxing risk |
@@ -47,7 +47,7 @@ Before committing any file to this public repository:
 
 - [ ] Does it contain passwords, tokens, or API keys? → **DO NOT COMMIT**
 - [ ] Is there a username/email/phone number in the config? → **REVIEW AND REMOVE**
-- [ ] Are there internal URLs (company-specific)? → **REPLACE WITH GENERIC OR REMOVE**
+- [ ] Are there internal URLs (company-specific)? → ** REPLACE WITH GENERIC OR REMOVE**
 - [ ] Does it contain company-hosted services or proprietary configs? → **DO NOT COMMIT**
 - [ ] Is this session data or cache that changes frequently? → **IGNORE VIA .gitignore**
 
@@ -57,26 +57,10 @@ Before committing any file to this public repository:
 
 | File | Status | Reason |
 |------|--------|--------|
-| `gh/config.yml` | ✅ SAFE | Global CLI settings only, no secrets |
-| `gh/hosts.yml` | ✅ SAFE (sanitized) | Username removed, only protocol preference |
 | `git/ignore` | ✅ SAFE | Local repo exclusions pattern |
 | `nvim/*` | ✅ SAFE | Neovim Lua configuration, no credentials |
 | `zed/settings.json` | ✅ SAFE | Editor preferences only |
 | `yazi/yazi.toml` | ✅ SAFE | File manager UI settings |
-
----
-
-## 🚨 Recent Security Fixes Applied
-
-1. **Removed username from `gh/hosts.yml`**
-   - Before: `user: simonpforster` (PII exposure)
-   - After: Removed entirely, only protocol preference remains
-
-2. **Added comprehensive `.gitignore`**
-   - Excludes session data and sensitive files that may be created locally
-
-3. **Removed outdated sections from README.md**
-   - Scala/Mason references removed to reduce confusion about what's maintained
 
 ---
 
@@ -103,7 +87,6 @@ Always manually review new files before committing, especially:
 
 - [Secret Management Best Practices | Dotfiles](https://dotfiles.io/en/guides/secret-management/)
 - [Three layers of secret defense for a public dotfiles repo](https://nick-liu.com/posts/public-dotfiles-secret-defense/)
-- [GitHub CLI Configuration in Dotfiles](https://deepwiki.com/gtn-74/dotfiles/6.2-github-cli-configuration)
 
 ---
 

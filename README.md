@@ -1,91 +1,49 @@
-# Dotfiles Configuration Management
+# Dotfiles
 
-This repository contains configuration files for various tools and applications, managed via [GNU Stow](https://www.gnu.org/software/stow/) to create symlinks in `~/.config/`.
+Managed with [GNU Stow](https://www.gnu.org/software/stow/). Each top-level directory is a stow package. `--no-folding` is set in `.stowrc` so stow creates individual file symlinks (not directory symlinks), preventing credential leaks.
 
 ## Install
 
 ```sh
-cd ~/dotfiles && stow --target ~/.config .
+git clone <repo-url> ~/dotfiles
+cd ~/dotfiles && stow nvim git zed yazi rex
 ```
+
+## Structure
+
+Each package mirrors its `~/.config/<app>/` layout:
+
+```
+<package>/<app>/files  ->  ~/.config/<app>/files
+```
+
+| Package | Contents |
+| ------- | -------- |
+| `nvim`  | Neovim config (kickstart-based), plugins in `lua/custom/plugins/` |
+| `git`   | Global git ignore patterns |
+| `zed`   | Zed editor preferences |
+| `yazi`  | Yazi file manager config |
+| `rex`   | Rex terminal config |
 
 ## Dependencies
 
-### System (Homebrew)
+### System
 
-| Tool | Install | Used by |
-|------|---------|---------|
-| [Neovim](https://neovim.io/) ≥ 0.12 | `brew install neovim` | nvim config |
-| [GNU Stow](https://www.gnu.org/software/stow/) | `brew install stow` | symlink management |
-| [tree-sitter CLI](https://tree-sitter.github.io/) | `brew install tree-sitter-cli` | nvim treesitter parser compilation |
-| [GitHub CLI](https://cli.github.com/) ≥ 2.0 | `brew install gh` | gh config |
-| [git](https://git-scm.com/) | usually pre-installed on macOS/Linux | git config |
+| Tool | Install |
+| ---- | ------- |
+| [GNU Stow](https://www.gnu.org/software/stow/) | `brew install stow` |
+| [Neovim](https://neovim.io/) >= 0.12 | `brew install neovim` |
+| [tree-sitter CLI](https://tree-sitter.github.io/) | `brew install tree-sitter-cli` |
 
-### Rust (rustup)
+### Rust
 
-| Tool | Install | Used by |
-|------|---------|---------|
-| [rustup](https://rustup.rs/) | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` | Rust toolchain management |
-| rust-analyzer | `rustup component add rust-analyzer` | nvim LSP (via rustaceanvim) |
+| Tool | Install |
+| ---- | ------- |
+| [rustup](https://rustup.rs/) | `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
+| rust-analyzer | `rustup component add rust-analyzer` |
 
-> **Note:** Add `rust-analyzer` to every toolchain you use (stable, nightly, etc.). Zed is a Rust application and requires rustup.
+Add `rust-analyzer` to every toolchain you use (stable, nightly, etc.).
 
-## Repository Structure
+### Auto-installed by Mason
 
-```
-dotfiles/
-├── README.md              # This file - project documentation
-├── .gitignore            # Local ignore patterns for git
-├── gh/                   # GitHub CLI configuration
-│   ├── config.yml        # Global settings (protocol, editor, pager)
-│   └── hosts.yml         # Host-specific configs (sanitized, no secrets)
-├── git/                  # Git ignore patterns for local repos
-│   └── ignore            # Patterns to exclude from git tracking
-├── nvim/                 # Neovim Lua configuration
-│   ├── nvim/             # Main neovim config directory
-│   │   ├── init.lua      # Primary configuration file
-│   │   └── lua/custom/plugins/*.lua  # Custom plugin definitions
-├── zed/                  # Zed editor settings (Rust-based IDE)
-│   ├── settings.json     # Editor preferences and layout
-│   └── settings_backup.json  # Previous settings backup
-└── yazi/                 # File manager configuration
-    └── yazi.toml         # File manager configuration with nvim integration
-
-## Best Practices
-
-### Security
-
-This repository follows security best practices:
-
-- ✅ **No secrets**: No passwords, API keys, tokens, or credentials are committed
-- ✅ **Sanitized configs**: User-specific data (like GitHub usernames) is excluded from public repos  
-- ⚠️ **Local-only configs**: Some configurations in `~/.config/` may contain private data not tracked here
-
-### Shell Configurations
-
-Shell configurations follow best practices:
-
-- **Zsh**: Primary interactive shell with [Powerlevel10k](https://github.com/romkatv/powerlevel10k) prompt theme
-- Each shell has its own configuration under `~/.config/{zsh,bash}/` after stow
-
-### Git Workflow
-
-This repository uses GNU Stow for symlink management:
-
-1. **Clone**: `git clone <repo-url> ~/dotfiles`
-2. **Install**: `cd ~/dotfiles && stow --target ~/.config .`
-3. **Update**: Edit files in the repo, then `stow` again
-4. **Rollback**: Use git to restore previous commit if needed
-
-### Project-Specific Configs
-
-Project-specific configurations (like `.claude/settings.local.json`) are excluded from the repository via `.gitignore`. These should be managed locally or through project-specific configuration management.
-
-## Maintenance
-
-- Keep this repository clean by removing unused directories
-- Regularly update dependencies in the README.md table
-- Document any changes to help future maintainers understand your setup
-
----
-
-*Last updated: $(date -u +%Y-%m-%d)*
+lua_ls, stylua (>= 2.2.0), codelldb, delve, markdownlint

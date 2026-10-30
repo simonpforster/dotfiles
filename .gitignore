@@ -14,6 +14,7 @@
 # Zed session data
 conversations/
 prompts/
+**/settings_backup.json
 
 # Stow configuration (handled by stow)
 .stowrc
